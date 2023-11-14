@@ -1,3 +1,61 @@
+## Nama: Sri Saraswati Widhisari
+## Kelas: PBP E
+## NPM : 2206812180
+
+# Tugas 8
+## 1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+-  Navigator.push() akan memasukkan halaman baru ke atas stack navigasi. Halama yang dimasukan akan menjadi halaman teraatas dalam stack navigasi, dan jika kemabli dari halaman tersebut, maka halaman sebelum halaman baru yang ditambahkan yang akan ditampilkan. 
+- Navigator.pushReplacement() akan memasukkan halaman baru ke atas stack navigas sekaligus menghapus halaman sebelumnya yang merupakan halaman teratas dari stack, sehingga ketika kembali, maka halaman sebelumnya yang berada di atas stack sebelum halaman baru ditambah tidak akan ditampilkan. 
+
+## 2. Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
+- ListView
+Merupakan widget yang digunakan untuk membuat daftar tampilan yang dapat bergulir (bisa discroll). Kemampuan scrollabel ini berguna ketika daftar item yang ingin ditampilkan lebih panjang daripada panjang layar perangkat. ListView sesuai utnk menampilkan daftar item seperti daftar produk, kumpulan berita, daftar event, dan lain-lain.
+- Stack
+Merupakan widget yang digunakna untuk melaksanakan penumpukan widget satu di atas widget lainnya. Stack sesuai digunakan ketika kita mau menerapkan tata letak yang lebik kompleks atau layering.
+- Expanded dan Flexible
+- Container
+Merupakan widget utnuk mengubah properti seperti padidng, ukuran, marhin, dan warna untuk latar. Di dalam container, bisa berisi widget-widget lainnya dan kita bisa mengatur tata letak widget lainnya. Container sesuai digunkana untuk mengatur properti dasar dan menata widget tersebut dengan properti yang sudah ditentukan.
+- Column dan Row
+Merupakan widget untuk mengatur tata letak widget di dalamnya (seperti tombol, teks, atau gambar) baik secara vertikal (Column), maupun secara horizontal (Row). Column dan Row sangat sesusai digunakan ketika kita mau menyusun widget dalam satu baris atau kolom dalam membuat tata letak linear. 
+Layout widget ini digunakan dalam Row atau Column, fungsinya untuk memberikan sautu widget ukuran dinamis, karena membantu mengatur proporsi yang sesuai dari sautu widget dan ruang yang tersedia. Widget ini sesuai ketika kita ingin menampilkan tampilan dinamis seperti pemberian proporsi ruang yang lebih luas untuk widget tertentu. 
+- SizedBox
+Merupakan widget yang dipakai untuk mengatur ukuran yang tepat terhadap suatu widget. Widget ini juga dapt memberikan white space di antara widget. Widget ini berguna ketika kita mau menentukan dimensi yang tepat dari suatu widget atau ketika kita mau memberikan white space di antara widget.
+
+## 3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+Pada tugas ini saya emnggunakan elemen input:
+- TextFormField
+Elemen ini digunakan untuk memasukkan teks seperti nama item, harga item, jumlah item, dan harga item. Eleemn ini juga digunakan untuk melakukan validasi dan mendapatkan nilai dari pengguna. 
+- ElevatedButton 
+Elemen ini merupakan tombol, dalam tugas ini, tombo tersebut berguna untuk mengirimkan atau mengirimkan formulir. 
+- AlertDialog
+Elemen ini digunakan untuk menampilkan dialog dengan isi informasi detail produk setelah tombol Save ditekan (formulir tersimpan).
+
+## 4. Bagaimana penerapan clean architecture pada aplikasi Flutter?
+Clean architecture merupakan konsep arsitektur perangkat lunak yang bertujuan untuk memisahkan tanggung jawab antara komponen-komponen dalam suatu aplikasi. Dalam Flutter, konsep ini diterapkan dengan pembuatan aplikasi yang terdiri dari 3 layer, antara lain:
+- Presentation 
+Layer ini berguna untuk memisahkan antara logika interaski antara pengguna dan tampilan (UI) dengan logika aplikasi. Pada layer ini, kita akan menggunakan widget-widget Flutter seperti StatelessWidget atau StatefulWidget. 
+- Domain  (Core)
+Layer ini berguna untuk mengatur bisnis logic dari aplikasi. Layer ini mendefinisikan entitas (domain models), use case (berisi aksi atau tugas yang dapat dilakukan oleh aplikasi) dan repository(berisis implementasi repository interface).
+- Data /Infrastructure
+Layer ini berguna untuk pengimplementasian infrastrukutr seperti database, API, atau penyimpanan lokal. Layer ini dapat ebrkomunikasi dengan doamin layer melalui repository interface.
+
+## 5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
+### Penambahan Drawer
+- Penambahan drawer dilakukan dengan menambahkan berkas left_drawer.dart pada direktori widgets. Di dalam file tersebut, kita menggunakan ListView yang terdiri dari children yang berisikan format style dan child berupa Column, yang terdiri dari children lagi yagn berisikan widget ListTile. Di tugas ini, terdapat 3 ListTile, yakni halaman utama, tambah item, dan lihat item, yang disusun secara kolom (vertikal). Ketiga widget ListTile itu memiliki onTap() yang meroute ke halaman masing-masing. Penggunaan Navigator.pushReplacement juga digunakan untuk penambahan halaman stack dengan jenis menghapus halaman sebelumnya. 
+- File ini kemduian diimpor pada halaman yang digunakan seperti MyHomePage dan ShopFormPage dan ditaruh di widget Scaffold
+### Pembuatan model, Pembuatan Form Item, dan Penampilan Data List Item
+- Pembuatan shoplist_form.dart pada direktori lib. Disni kita menambahkan widget Scaffold dengan AppBar dan juga left drawer yang sudah kita buat sebelumnya. 
+- Kita juga membuat models di direktori models di lib. Pada models ini, kita membuat class Objek untuk produk dengan atribut, seperti nama, harga, jumlah, dan deskripsi. 
+- Setelah itu, tambahkan widget form untuk wadah input user dan SingleChildScrollView untuk membuat form ini dapat digulir. 
+- Pada bidang input, kita menggunakan elemen TextFormField. Kita juga memberikan padding dan column untuk memberikan tata letak yang rapi untuk elemen input. 
+- Validasi input dilakukan dengan memberikan jenis validasi berupa :
+  - Jika nama maka harus bertipe data string, tidak boleh kosong, dan tidak boleh mengantung angka dari 0 -9 
+  - Deskripsi tidak boleh kosong
+  - Baik jumlah item dan harga item harus bertipe data integer
+- Ketika user sudah mengklik tombol Simpan dengan semua input sudah benar sesuai format yang ditetapkan, maka akan muncul AlertDialog yang berisikan data yang dimasukkan oleh user. Tampilan ini menggunakan showDialog. Setealh selesai dialog, formulir akan direset secara otomatis. 
+### Melakukan Refactoring File melalui Pemindahan 
+- Membuat direktori baru dengan anama screens, yang berisi shoplist_form.dart dan shop_card.dart. Pada shop_card.dart berisi ShopItem Class dan ShopCard Class. Kelas ShopItem merepresentasikan item yang ada di Toko Saras dengan tiap objek ShopItem memilki dua atribut yakni name dan icon. Kelas ShopCard memnafaatkan InkWell untuk memberikan respons ketika kartu ditekan, sedangkan material memberikan efek visual seperti warna latar belakang.
+### note: ada pengerjaan bonus dengan membaut lihat produk page sesuai dengan atribut yang sudah ditaruh pada models item. 
 # Tugas 7 
 ## 1. Apa perbedaan utama antara stateless dan stateful widget dalam konteks pengembangan aplikasi Flutter?
         Ada dua jenis sifat widget pada pengembangan aplikasi flutter, yakni stateless dan stateful. Perbedaan utama keduanya adalah kemampuan untuk berubah mereka, tentang bagaimana cara mereka memproses dan merender komponen- komponen widget yang ada di dalam mereka.
